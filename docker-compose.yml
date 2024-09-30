@@ -1,0 +1,24 @@
+services:
+  backend:
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - '8080:8080' # Maps port 3333 on the host to port 3333 in the container
+    volumes:
+      - ./apps/backend:/usr/src/app
+    environment:
+      - NX_API_BASE_URL=http://localhost:8080
+   
+frontend:
+    build:
+      context: ./apps/frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - '3000:3000' # Maps port 3333 on the host to port 3333 in the container
+    volumes:
+      - ./apps/frontend:/usr/src/app
+    environment:
+      - NX_API_BASE_URL=http://localhost:3000
